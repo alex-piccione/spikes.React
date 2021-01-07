@@ -4,10 +4,16 @@ git@gitlab.com:alessandro.piccione/spikes.react.git
 https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/README.md
 
 
+## React Playgrounds
+
+If you’re interested in playing around with React, you can use an online code playground. 
+Try a Hello World template on [CodePen](https://reactjs.org/redirect-to-codepen/hello-world),
+ [CodeSandbox](https://codesandbox.io/s/new), or [Stackblitz](https://stackblitz.com/fork/react).
+
 ## Typescript
 
-- Initially 
-Use --template typescript
+- From the beginning 
+Use *--template typescript*  
 ``yarn create react-app my-app --template typescript``
 
 - Add later
