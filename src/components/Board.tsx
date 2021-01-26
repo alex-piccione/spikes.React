@@ -1,6 +1,5 @@
 import React from "react"
-
-import {Value, Square} from "./Square"
+//import {Value, Square} from "./Square"
 
 interface BoardProps {
 
@@ -55,3 +54,15 @@ export class Board extends React.Component<BoardProps, BoardState> {
   }
 
 }
+
+type Value = null | "X" | "O"
+
+interface SquareProps {
+    value: Value,
+    onclick?: React.MouseEventHandler<HTMLElement>
+  }
+  
+let Square = (props:SquareProps) =>
+      <button className="square" onClick={props.onclick}>
+        {props.value}
+      </button>

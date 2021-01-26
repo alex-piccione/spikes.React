@@ -2,7 +2,6 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 
-import {Value, Square} from "./components/Square"
 import {Board} from "./components/Board"
 
 // import App from './App';
