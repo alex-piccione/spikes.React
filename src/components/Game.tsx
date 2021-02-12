@@ -54,7 +54,7 @@ export class Game extends React.Component<any, GameState> {
   jumpTo(step:number) {
     this.setState({ 
         step: step, 
-        xIsNext: (step % 2) == 0})
+        xIsNext: (step % 2) === 0})
   }
 
   render() {

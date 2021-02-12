@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react"
+import React from "react"
 
 export type Value = null | "X" | "O"
 

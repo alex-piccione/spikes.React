@@ -3,11 +3,6 @@ import ReactDOM from "react-dom"
 import "./index.css"
 import {Game} from "./components/Game"
 
-// import reportWebVitals from './reportWebVitals';
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-
 ReactDOM.render(
   <React.StrictMode>
     <Game />
@@ -16,12 +11,12 @@ ReactDOM.render(
 )
 
 function Hello(props:any) {
-  return <h1>Hello</h1>
+  return <h1>Hello at {props.now}</h1>
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <Hello />
+    <Hello now={new Date().toISOString()} />
   </React.StrictMode>, 
   document.getElementById("hello")  
 )
