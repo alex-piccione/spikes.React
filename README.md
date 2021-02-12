@@ -5,7 +5,7 @@ https://github.com/facebook/create-react-app/blob/master/packages/cra-template/t
 
 ## Courses:
 
-- Reac Fundamentals on Pluralsight: https://app.pluralsight.com/course-player?clipId=9bd76a89-6388-4662-9346-98fa57976263
+- React Fundamentals on Pluralsight: https://app.pluralsight.com/course-player?clipId=9bd76a89-6388-4662-9346-98fa57976263
 
 ## React Playgrounds
 

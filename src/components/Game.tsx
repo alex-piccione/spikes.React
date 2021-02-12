@@ -15,8 +15,6 @@ export class Game extends React.Component<any, GameState> {
       moves: [{ squares: Array<Value>(9).fill(null)}], // initial empty move
       xIsNext: true,
     }
-
-    let a = this.state
   }
 
   handleClick(i: number) {    
@@ -68,9 +66,9 @@ export class Game extends React.Component<any, GameState> {
       : `Next player: ${this.state.xIsNext ? "X" : "O"}`
 
     const steps = moves.map( (move, index) => {
-        const text = index ?
-            "Go to move #" + index :
-            "Go to game start"
+        const text = index 
+          ? "Go to move #" + index 
+          : "Go to game start"
         return (
             <li key={index}>
                 <button onClick={() => this.jumpTo(index)}>{text}</button>

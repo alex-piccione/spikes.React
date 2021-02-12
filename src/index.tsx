@@ -12,5 +12,16 @@ ReactDOM.render(
   <React.StrictMode>
     <Game />
   </React.StrictMode>, 
-  document.getElementById("root")  
+  document.getElementById("game")  
+)
+
+function Hello(props:any) {
+  return <h1>Hello</h1>
+}
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Hello />
+  </React.StrictMode>, 
+  document.getElementById("hello")  
 )
