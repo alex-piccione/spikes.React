@@ -8,4 +8,30 @@ export class AuthorQuiz extends Component {
     }
 }
 
-let Sum = (props:any) => <div className="alert alert-primary">{props.a} + {props.b} = {props.a + props.b}</div>  
+let Sum = (props:any) => <div className="alert alert-primary"><Number value={0} /> + <Number value={1}></Number> = {props.a + props.b}</div>  
+
+
+type NumberProps = {
+  value: number
+}
+
+type NumberState = {  
+  clicks:number
+}
+
+export class Number extends Component<NumberProps, NumberState> {
+  constructor(props:NumberProps) {
+    super(props)
+    this.state = {clicks: props.value}
+  }
+
+  numberStyle = () => { return {
+    cursor: "pointer",
+    color: this.state.clicks > 0 ? "blue" : "red"
+  }}
+
+  render() {
+    return <span style={this.numberStyle()} onClick={() => this.setState({clicks: this.state.clicks+1})}>{this.state.clicks}</span>
+  }
+}
+

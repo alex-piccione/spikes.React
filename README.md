@@ -31,3 +31,6 @@ Needed to change reportWebVitals.tsx file
 
 ## Hooks
 
+
+## Boostrap
+The project use [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
