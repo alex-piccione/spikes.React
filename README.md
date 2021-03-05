@@ -36,4 +36,6 @@ Needed to change reportWebVitals.tsx file
 The project use [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
 ## Tests
-Cannot use **enzyme** because an adapter for React 17 does not exists yet.
+Cannot use **enzyme** because an adapter for React 17 does not exists yet.  
+A lot of problem trying to run tests where the component ``setState()`` is called while the component is not "mounted".  
+> Can't call setState on a component that is not yet mounted.
