@@ -37,10 +37,12 @@ describe("Sum", () => {
 
   describe("when A=0, B=0 and click A", () => {    
     it("sum is 1", () => {
-      sum.click("A")
-      sum.forceUpdate()  
-      sum.render()    
-      expect(sum.state.sum).toBe(1)      
+      _act(()=>{
+        sum.click("A")
+        //sum.forceUpdate()  
+        sum.render()    
+        expect(sum.state.sum).toBe(1)   
+      })   
     })
   })
 
@@ -57,4 +59,5 @@ describe("Sum", () => {
 
 })
 
+function _it(test:string, action:() => void) { }
 

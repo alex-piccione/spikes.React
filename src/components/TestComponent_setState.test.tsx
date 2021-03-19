@@ -2,7 +2,7 @@ import { Component } from "react"
 import ReactDOM from "react-dom"
 import { act } from "react-dom/test-utils"
 
-// Spike to test a component state
+/* Component */
 
 interface ColorProps { value:string }
 interface ColorState { value:string }
@@ -15,44 +15,37 @@ export class Color extends Component<ColorProps, ColorState> {
   
   setColor = (color:string) => this.setState({value:color})
   
-  componentDidUpdate = () => {
-    console.log("component did update")    
-  }
-
   render() {
     return <span onClick={() => this.setColor("red")} style={{ color:this.state.value }}>{this.state.value}</span>
   }
 }
 
-let numberStyle = (value:number) => { return {
-  cursor: "pointer",
-  color: value > 0 ? "blue" : "red"
-}}
 
-export function RenderColor(props:any) { <span style={numberStyle(props.value)} onClick={props.handleClick}>{props.value}</span> }
-export function Num(props:any) { return <span style={numberStyle(props.value)} onClick={props.handleClick}>{props.value}</span> }
+/* Test */
 
 describe("Color", () => {
   let container = document.createElement("div")
   document.body.appendChild(container)
 
-  let color:Color
-
   beforeAll(()=> {
-    color = new Color({value:"white"})
-    ReactDOM.render(color.render(), container) // added call to render() trying to have the component "mounted"
+    act(() => { 
+      // new Color(...).render() returns an error for component not mounted?
+      // https://stackoverflow.com/questions/66673412/why-react-jsx-element-created-with-render-is-not-mounted
+      ReactDOM.render(<Color value="yellow" />, container)
+    })
   })
 
-  describe("setColor('red')", () => {
-    it("change state.value to 'red'", () => {    
-      color.render()
-      color.setColor("red")      
-      //color.forceUpdate() // to get the component state updated but obtain same error for component not mounted
-      color.render()
-      //expect(color.state.value).toBe("red")  setState is asynchronous so does not change the state immediately
-      expect(color.state.value).toBe("white")
+  describe("when 'click' occours", () => {   
+
+    it("color is changed to 'red'", () => {     
+      
+      const colorElement = container.children[0]    
+      act(() => { 
+        colorElement.dispatchEvent(new MouseEvent('click', {bubbles: true}));        
+      })
+
+      const style = window.getComputedStyle(colorElement)
+      expect(style.color).toBe("red")
     })
   })
 })
-
-function _it(test:string, action:() => void) { }
