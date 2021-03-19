@@ -26,25 +26,25 @@ export class Color extends Component<ColorProps, ColorState> {
 describe("Color", () => {
   let container = document.createElement("div")
   document.body.appendChild(container)
+  var component
 
   beforeAll(()=> {
     act(() => { 
+      //ReactDOM.render( new Color({value:"yellow"}).render(), container)
       // new Color(...).render() returns an error for component not mounted?
       // https://stackoverflow.com/questions/66673412/why-react-jsx-element-created-with-render-is-not-mounted
-      ReactDOM.render(<Color value="yellow" />, container)
+      ReactDOM.render( new Color({value:"yellow"}).render(), container)            
+      component = container.children[0]
     })
   })
 
   describe("when 'click' occours", () => {   
-
-    it("color is changed to 'red'", () => {     
-      
-      const colorElement = container.children[0]    
+    it("color is changed to 'red'", () => {  
       act(() => { 
-        colorElement.dispatchEvent(new MouseEvent('click', {bubbles: true}));        
-      })
-
-      const style = window.getComputedStyle(colorElement)
+        component.dispatchEvent(new MouseEvent('click', {bubbles: true}));        
+      })     
+      
+      const style = window.getComputedStyle(component)
       expect(style.color).toBe("red")
     })
   })
