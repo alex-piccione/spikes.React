@@ -2,8 +2,9 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./CSS/index.css"
 import "./CSS/bootstrap.min.css"
-import {Game} from "./components/Game"
-import {AuthorQuiz} from "./components/AuthorQuiz"
+import { Game } from "./components/Game"
+import { AuthorQuiz } from "./components/AuthorQuiz"
+import { StopWatch } from "./components/StopWatch"
 import { Sum } from "./components/Sum & Number"
 
 ReactDOM.render(
@@ -27,3 +28,9 @@ ReactDOM.render(
   document.getElementById("AuthorQuiz")  
 )
 
+ReactDOM.render(
+  <React.StrictMode>
+    <StopWatch />
+  </React.StrictMode>,
+  document.getElementById("StopWatch")
+)

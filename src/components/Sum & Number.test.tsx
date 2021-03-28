@@ -1,5 +1,4 @@
-import { render } from "@testing-library/react"
-import React from "react"
+import { render, screen } from "@testing-library/react"
 import ReactDOM from "react-dom"
 import { act } from "react-dom/test-utils"
 import { Sum, Num } from "./Sum & Number"
@@ -18,31 +17,40 @@ describe("Num", () => {
 
 describe("Sum", () => {
 
+  test("render_1", () => {
+    console.log(1)
+    render(<Sum a={0} b={0} data-testid={"test"} />)
+
+    expect(screen.getAllByTestId("test")).toBeDefined()
+
+  })
+
+  console.log(2)
   let container = document.createElement("div")
   document.body.appendChild(container)
-  let sum:Sum
+  let component:Element
 
   it("render", () => {
     const div = document.createElement("div")
     ReactDOM.render(<Sum a={0} b={0} data-testid={"test"} />, div)
-    const sum = document.getElementsByTagName("div")[0]
+    const sum = document.querySelector("div[testid='test']")
     if(sum == undefined) throw("sum is undefined")
     expect(sum?.innerHTML).toContain(" = 0")
   })
 
-  beforeAll(() => {
-    sum = new Sum({a:0, b:0})  
-    ReactDOM.render(sum.render(), container)
-  })
+  let createSum = (a:number,b:number) => <Sum a={a} b={b} />
 
-  describe("when A=0, B=0 and click A", () => {    
-    it("sum is 1", () => {
-      _act(()=>{
-        sum.click("A")
-        //sum.forceUpdate()  
-        sum.render()    
-        expect(sum.state.sum).toBe(1)   
-      })   
+  describe("when A=0, B=0 and click A", () => {  
+    beforeAll(() =>{act(() => {
+      const sum = createSum(0, 0)
+      ReactDOM.render(sum, container)
+      component = container.children[0]
+      let A = component.children[0]
+      A.dispatchEvent(new MouseEvent('click', {bubbles: true}));  
+    })})
+
+    _it("result is 1", () => {      
+      expect(component.innerHTML.endsWith(" = 1"))
     })
   })
 
