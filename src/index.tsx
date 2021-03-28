@@ -4,7 +4,7 @@ import "./CSS/index.css"
 import "./CSS/bootstrap.min.css"
 import { Game } from "./components/Game"
 import { AuthorQuiz } from "./components/AuthorQuiz"
-import { StopWatch } from "./components/StopWatch"
+import { } from "./components/StopWatch"
 import { Sum } from "./components/Sum & Number"
 
 ReactDOM.render(
@@ -26,11 +26,4 @@ ReactDOM.render(
     <AuthorQuiz />
   </React.StrictMode>, 
   document.getElementById("AuthorQuiz")  
-)
-
-ReactDOM.render(
-  <React.StrictMode>
-    <StopWatch />
-  </React.StrictMode>,
-  document.getElementById("StopWatch")
 )
