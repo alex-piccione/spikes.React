@@ -29,6 +29,9 @@ and rename all .js to * .tsx
 Didn't worked straight.  
 Needed to change reportWebVitals.tsx file
 
+# Redux
+Application state container.
+
 ## Hooks
 
 

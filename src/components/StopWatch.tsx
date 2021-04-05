@@ -1,57 +1,53 @@
-//import { render } from "@testing-library/react"
-import { Component } from "react"
 import ReactDOM from "react-dom"
+import { StateContainer, createStoreContainer } from "./StateContainer"
 
-let model = {
-  running: false,
-  time: 0
+export type State = {
+  running:boolean
+  time: number  
 }
-/*
-type Intents {
-  TICK: "Tick",
-  START: "Start",
-  STOP: "Stop",
-  RESET: "Reset"
-}*/
 
-const view = () => {
-  let minutes = Math.floor(model.time / 60)
-  let seconds = model.time - (minutes * 60)
+export type Intents = "Tick" | "Start" | "Stop" | "Reset"
+
+const update = (state:State, intent:Intents) => {
+  return (
+    intent == "Tick" ? () => (state.running ? Object.assign(state, {time: state.time + 1 } ) : state) :
+    intent == "Start" ? () => Object.assign(state, {running: true }) :
+    intent == "Stop" ? () => Object.assign(state, {running: false }) :
+    intent == "Reset" ? () => Object.assign(state, {time: 0 }) :    
+    () => {throw new Error("Intent not valid: " + intent)}
+  )()
+}
+
+let container:StateContainer = createStoreContainer(update)
+
+const view = (state:State) => {
+  let minutes = Math.floor(state.time / 60)
+  let seconds = state.time - (minutes * 60)
   let secondsFormatted = `${seconds < 10 ? '0' : ''}${seconds}`
+
+  let startStop = () => {
+    container.dispatch(state.running ? "Stop" : "Start")
+  }
+  
+  let reset= () => {
+    container.dispatch("Reset")
+  }
+
   return <div>
     <div>{minutes}:{secondsFormatted}</div>
-    <button onClick={handler}>{model.running ? "Stop" : "Start"}</button>
+    <button onClick={startStop}>{state.running ? "Stop" : "Start"}</button>
     <button onClick={reset}>Reset</button>
   </div>
 }
 
 const render = () => {
-  ReactDOM.render(view(), document.getElementById("StopWatch"))
+  ReactDOM.render(view(container.getState()), document.getElementById("StopWatch"))
 }
 
-const update = (model:any, intent:string) => {
-    const updates:any = {
-      "TICK": () => Object.assign(model, {time: model.time + 1 }),
-      "START": () => Object.assign(model, {running: true }),
-      "STOP": () => Object.assign(model, {running: false }),
-      "RESET": () => Object.assign(model, {time: 0 }),
-    }
-    return updates[intent](model)
-}
-
-let handler = (event:any) => {
-  model = update(model, model.running ? "STOP" : "START" )
-  render()
-}
-let reset= () => {
-  model = update(model, "RESET" )
-  render()
-}
+container.subscribe(render)
 
 setInterval(() => {
-  if(model.running)
-    model = update(model, "TICK")
-  render()
+  container.dispatch("Tick")
 }, 1000)
 
 render()
