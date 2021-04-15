@@ -1,20 +1,9 @@
 import ReactDOM from "react-dom"
 import { Action, createStore, Reducer } from "redux"
-import { isExpressionWithTypeArguments } from "typescript"
-import { StateContainer, createStoreContainer } from "./StateContainer"
-
-//import { createStoreHook, Provider } from "react-redux"
-
-
 
 export type State = {
   running:boolean
   time: number  
-}
-
-let Store = {
-
-
 }
 
 export type Intents = "Tick" | "Start" | "Stop" | "Reset"  
@@ -22,34 +11,17 @@ export type Intents = "Tick" | "Start" | "Stop" | "Reset"
 const createAction = (intent:Intents) => { return { type: intent} }
 const initialState = { running:false, time:0 }
 
-/*
-const update = (state:State, intent:Intents) => {
-  return (
-    intent == "Tick" ? () => (state.running ? Object.assign(state, {time: state.time + 1 } ) : state) :
-    intent == "Start" ? () => Object.assign(state, {running: true }) :
-    intent == "Stop" ? () => Object.assign(state, {running: false }) :
-    intent == "Reset" ? () => Object.assign(state, {time: 0 }) :    
-    () => {throw new Error("Intent not valid: " + intent)}
-  )()
-}*/
-
 const reducer:Reducer<State, Action<Intents>> = (previousState:State|undefined, action:Action<Intents>) => {
 
   const state = previousState || initialState
-
-  return (
-    action.type == "Tick" ? () => (state.running ? Object.assign(state, {time: state.time + 1 } ) : state) :
-    action.type == "Start" ? () => Object.assign(state, {running: true }) :
-    action.type == "Stop" ? () => Object.assign(state, {running: false }) :
-    action.type == "Reset" ? () => Object.assign(state, {time: 0 }) :    
-    () => {throw new Error("Intent not valid: " + action.type)}
-  )()
+  return action.type === "Tick" ? (state.running ? Object.assign(state, {time: state.time + 1 } ) : state) :
+    action.type === "Start" ? Object.assign(state, {running: true }) :
+    action.type === "Stop" ? Object.assign(state, {running: false }) :
+    action.type === "Reset" ? Object.assign(state, {time: 0 }) :    
+    state  
 }
 
-//let container:StateContainer = createStoreContainer(update)
-let state:State = createStore(reducer)
-
-//let createAction (intent:Intents) => new Action<Intents>()
+let store = createStore(reducer)
 
 const view = (state:State) => {
   let minutes = Math.floor(state.time / 60)
@@ -57,13 +29,11 @@ const view = (state:State) => {
   let secondsFormatted = `${seconds < 10 ? '0' : ''}${seconds}`
 
   let startStop = () => {
-    //container.dispatch(state.running ? "Stop" : "Start")    
-    reducer(state, createAction(state.running ? "Stop" : "Start"))
+    store.dispatch(createAction(state.running ? "Stop" : "Start"))
   }
   
   let reset = () => {
-    //container.dispatch("Reset")
-    reducer(state, createAction("Reset"))
+    store.dispatch(createAction("Reset"))
   }
 
   return <div>
@@ -74,14 +44,13 @@ const view = (state:State) => {
 }
 
 const render = () => {
-  //ReactDOM.render(view(container.getState()), document.getElementById("StopWatch"))
+  ReactDOM.render(view(store.getState()), document.getElementById("StopWatch"))
 }
 
-//container.subscribe(render)
+store.subscribe(render)
 
 setInterval(() => {
-  //container.dispatch("Tick")
-  //reducer()
+  store.dispatch(createAction("Tick"))
 }, 1000)
 
 render()

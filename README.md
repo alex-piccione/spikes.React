@@ -32,6 +32,13 @@ Needed to change reportWebVitals.tsx file
 # Redux
 Application state container.
 
+Added "redux", "react-redux" and "@types/react-redux" libraries (the last one should be included automatically).  
+I'm trying to follow the Pluralsight course and I built a custom StateContainer with dispatch(), submit(), getState(), update() (= reduce()) 
+but I find out the symntax used by Redux JS is quite different with the TypeScript version so I'm switching looking into this course too:
+https://redux.js.org/tutorials/fundamentals/part-1-overview
+
+
+
 ## Hooks
 
 

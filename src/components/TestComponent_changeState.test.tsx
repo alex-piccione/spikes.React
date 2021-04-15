@@ -26,7 +26,7 @@ export class Color extends Component<ColorProps, ColorState> {
 describe("Color", () => {
   let container = document.createElement("div")
   document.body.appendChild(container)
-  var component
+  var component: Element
 
   beforeAll(()=> {
     act(() => { 
