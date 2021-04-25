@@ -3,6 +3,8 @@ import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } fro
 import DateAssetsView from "./DateAssetsView.component"
 import DateAssetsAdd from "./DateAssetsAdd.component"
 
+import { getDatePart } from "../../date utils"
+
 type DashboardProps = {
   currency: string
   availableAssets: Asset[]
@@ -19,12 +21,22 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
     this.state = { portfolio: createInitialPortfolio() }
   }
 
-  addAsset(date:Date, asset:AssetAtDate) {
+  //addAsset(date:Date, asset:AssetAtDate) {
+  addAsset = (date:Date, asset:AssetAtDate) => {   
+
+    let portfolio = this.state.portfolio   
+    let existingDate = portfolio.dates.filter(d => getDatePart(d.date) == getDatePart(date))
     
-    // TODO not implemented
-    //alert(date.toUTCString())
-
-
+    if (existingDate.length === 0) {       
+      const newDate:DateAssets = { date: date, assets: [asset]}  
+      portfolio.dates.push( newDate )
+      this.setState({portfolio: portfolio})
+    }
+    else
+    {
+      existingDate[0].assets.push( asset )    
+      this.setState({portfolio: portfolio})
+    }
   }
   
   render() {

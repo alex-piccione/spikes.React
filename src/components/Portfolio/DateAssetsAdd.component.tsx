@@ -35,7 +35,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   addAsset = (assetCode:string, value:number) => {
 
     if (this.state.date === undefined)
-      return this.warning("Please define a date")
+      return this.warning("Please select a date")
 
     const asset = this.resolveAsset(assetCode)
 
@@ -46,6 +46,8 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
 
     this.props.add(this.state.date, newAsset)
   }
+
+  setDate = (date:Date|null) => this.setState({date: date||undefined})
 
   warning(message:string) {
     alert(message)
@@ -58,7 +60,8 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
           <label className="col-form-label">Date</label>          
         </div>
         <div className="col-auto">
-          <input type="date" className="form-control-sm" value={this.state.date && this.state.date.toUTCString()}></input>
+          <input type="date" className="form-control-sm" value={this.state.date && this.state.date.toUTCString()} 
+            onChange={evt => this.setDate(evt.target.valueAsDate)}></input>
         </div>
       </div>
       <div className="input-group"></div>      
