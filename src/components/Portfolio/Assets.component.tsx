@@ -1,0 +1,16 @@
+import React from "react"
+import { Asset, DateAssets } from "./Portfolio"
+
+interface AssetProps {
+  asset:Asset
+}
+
+export class Assets extends React.Component<AssetProps, DateAssets> {
+  constructor(props:AssetProps) {
+    super(props)
+  }
+
+  render() {
+    return <div>Asset: {this.state.date}</div>
+  }
+}

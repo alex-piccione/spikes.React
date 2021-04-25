@@ -21,7 +21,7 @@ export class Sum extends Component<SumProps, SumState> {
   sum = (a:number, b:number) => a+b
 
   click = (n:AB) => {     
-    n == "A" ?
+    n === "A" ?
     this.setState({a: this.state.a + 1, sum: this.sum(this.state.a+1, this.state.b)}) :
     this.setState({b: this.state.b + 1, sum: this.sum(this.state.a, this.state.b+1)})
   }

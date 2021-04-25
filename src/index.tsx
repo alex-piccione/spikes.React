@@ -6,6 +6,7 @@ import { Game } from "./components/Game"
 import { AuthorQuiz } from "./components/AuthorQuiz"
 import { } from "./components/StopWatch"
 import { Sum } from "./components/Sum & Number"
+import PortfolioDashboard from "./components/Portfolio/PortfolioDashboard"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,4 +27,18 @@ ReactDOM.render(
     <AuthorQuiz />
   </React.StrictMode>, 
   document.getElementById("AuthorQuiz")  
+)
+
+const availableAssets = [
+  { name: "Pound", code: "GBP"},
+  { name: "Euro", code: "EUR"},
+  { name: "US Dollar", code: "USD"},
+  { name: "Bitcoin", code: "BTC"},
+]
+
+ReactDOM.render(
+  <React.StrictMode>
+    <PortfolioDashboard currency="GBP" availableAssets={availableAssets} />
+  </React.StrictMode>, 
+  document.getElementById("Portfolio")  
 )

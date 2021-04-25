@@ -54,3 +54,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+/* Portfolio */
+
+.portfolio-date-container {
+  border: solid 1px rgb(120, 120, 130);
+  border-radius: 3px;
+}
+
+.portfolio-date {
+  padding: 2px 5px;
+  font-size: large;
+  color: rgb(50, 50, 60);  
+  background-color: rgb(230, 230, 245);
+}
+
+.portfolio-date-asset {
+  background-color: rgb(240, 240, 255);
+}
