@@ -2,6 +2,7 @@ import React from "react"
 import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./Portfolio"
 import DateAssetsView from "./DateAssetsView.component"
 import DateAssetsAdd from "./DateAssetsAdd.component"
+import InputField from "../Fields/InputField"
 
 import { getDatePart } from "../../date utils"
 
@@ -42,6 +43,10 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
   render() {
     return <div className="container">
       <h1>Portfolio</h1>
+
+      <div>React Hooks spike</div>
+      <div><InputField /></div>
+
       <div>Currency: {this.props.currency}</div>
       <div><h2>Assets</h2></div>
       {this.state.portfolio.dates.map(d =>
