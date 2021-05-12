@@ -26,7 +26,7 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
   addAsset = (date:Date, asset:AssetAtDate) => {   
 
     let portfolio = this.state.portfolio   
-    let existingDate = portfolio.dates.filter(d => getDatePart(d.date) == getDatePart(date))
+    let existingDate = portfolio.dates.filter(d => getDatePart(d.date) === getDatePart(date))
     
     if (existingDate.length === 0) {       
       const newDate:DateAssets = { date: date, assets: [asset]}  

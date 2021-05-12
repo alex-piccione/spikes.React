@@ -1,6 +1,5 @@
-import { emitWarning } from "process"
 import React from "react"
-import { Asset, AssetAtDate, DateAssets } from "./Portfolio"
+import { Asset, AssetAtDate } from "./Portfolio"
 
 interface Props {
   availableAssets: Asset[],
