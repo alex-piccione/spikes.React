@@ -3,6 +3,7 @@ import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } fro
 import DateAssetsView from "./DateAssetsView.component"
 import DateAssetsAdd from "./DateAssetsAdd.component"
 import InputField from "../Fields/InputField"
+import ImageChangeOnMouseOver from "../ImageChangeOnMouseOver"
 
 import { getDatePart } from "../../date utils"
 
@@ -46,6 +47,10 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
 
       <div>React Hooks spike</div>
       <div><InputField /></div>
+
+      <ImageChangeOnMouseOver></ImageChangeOnMouseOver>
+
+      <hr />
 
       <div>Currency: {this.props.currency}</div>
       <div><h2>Assets</h2></div>
