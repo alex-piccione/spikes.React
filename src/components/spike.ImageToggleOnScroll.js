@@ -5,16 +5,18 @@ const ImageToggleOnScroll = () => {
 
   const imageRef = useRef()
   const [inView, setInView] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   // when component is mounted
+  // called after the page is rendered
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler)
-    setInView(isInView())
-
+    //setInView(isInView())
+    setIsLoading(false)
     return( () => {
       window.removeEventListener("scroll", scrollHandler)
     })
-  }, [] )  // dependencies
+  }, [isLoading] )  // dependencies
 
   const scrollHandler = () => {
     setInView(() => isInView())
@@ -28,8 +30,7 @@ const ImageToggleOnScroll = () => {
     else return false
   }
 
-  return (<img alt="computer" src={ inView ? mainImage : bwImage } ref={imageRef} />)
-
+  return (isLoading ? null : (<img alt="computer" src={ inView ? mainImage : bwImage } ref={imageRef} />))
 }
 
 export default ImageToggleOnScroll
