@@ -114,7 +114,7 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
     <div className="col-auto">
       <select className="form-control-sm" onChange={evt => this.selectAsset(evt.target.value)}>
         <option>(select an asset)</option>
-        {this.props.assets.map(a => <option value={a.code}>{a.code}</option>)}
+        {this.props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
       </select>
     </div>
     <div className="col-auto">
