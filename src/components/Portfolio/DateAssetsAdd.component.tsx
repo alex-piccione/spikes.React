@@ -1,5 +1,5 @@
 import React from "react"
-import { Asset, AssetAtDate } from "./Portfolio"
+import { Asset, AssetAtDate } from "./types"
 
 interface Props {
   availableAssets: Asset[],

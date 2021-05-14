@@ -3,6 +3,10 @@
 git@gitlab.com:alessandro.piccione/spikes.react.git
 https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/README.md
 
+To run the app:
+- ``yarn start``
+- ``npm start`` or ``npm run start``
+
 ## Courses:
 
 - React Fundamentals on Pluralsight: https://app.pluralsight.com/course-player?clipId=9bd76a89-6388-4662-9346-98fa57976263
@@ -38,9 +42,6 @@ I'm trying to follow the Pluralsight course and I built a custom StateContainer 
 but I find out the symntax used by Redux JS is quite different with the TypeScript version so I'm switching looking into this course too:
 https://redux.js.org/tutorials/fundamentals/part-1-overview
 
-
-
-## Hooks
 
 
 ## Boostrap

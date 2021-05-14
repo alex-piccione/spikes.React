@@ -1,5 +1,5 @@
 import React from "react"
-import { Asset, DateAssets } from "./Portfolio"
+import { Asset, DateAssets } from "./types"
 
 interface AssetProps {
   asset:Asset

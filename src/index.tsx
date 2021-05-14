@@ -6,7 +6,7 @@ import { Game } from "./components/Game"
 import { AuthorQuiz } from "./components/AuthorQuiz"
 import { } from "./components/StopWatch"
 import { Sum } from "./components/Sum & Number"
-import PortfolioDashboard from "./components/Portfolio/PortfolioDashboard"
+import PortfolioDashboard from "./components/Portfolio/Dashboard"
 
 ReactDOM.render(
   <React.StrictMode>

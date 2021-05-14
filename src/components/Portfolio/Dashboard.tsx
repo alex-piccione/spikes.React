@@ -1,9 +1,11 @@
 import React from "react"
-import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./Portfolio"
+import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./types"
 import DateAssetsView from "./DateAssetsView.component"
 import DateAssetsAdd from "./DateAssetsAdd.component"
-import InputField from "../Fields/InputField"
-import ImageChangeOnMouseOver from "../ImageChangeOnMouseOver"
+//import InputField from "../Fields/InputField"
+//import ImageChangeOnMouseOver from "../spike.ImageChangeOnMouseOver"
+//import UseEffect from "../spike.UseEffect"
+import ImageToggleOnScroll from "../spike.ImageToggleOnScroll"
 
 import { getDatePart } from "../../date utils"
 
@@ -45,10 +47,12 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
     return <div className="container">
       <h1>Portfolio</h1>
 
-      <div>React Hooks spike</div>
-      <div><InputField /></div>
+      <div>React Hooks spikes</div>
 
-      <ImageChangeOnMouseOver></ImageChangeOnMouseOver>
+      {/*<InputField />*/}
+      {/*<ImageChangeOnMouseOver></ImageChangeOnMouseOver>*/}
+      {/*<UseEffect />*/}
+      <ImageToggleOnScroll />
 
       <hr />
 

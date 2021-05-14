@@ -1,5 +1,5 @@
 import React from "react"
-import { DateAssets } from "./Portfolio"
+import { DateAssets } from "./types"
 
 interface DateViewProps { dateAssets:DateAssets }
 
