@@ -36,9 +36,16 @@ const availableAssets = [
   { name: "Bitcoin", code: "BTC"},
 ]
 
+const config = {
+  currency: "GBP"
+}
+export const ConfigContext = React.createContext(config)
+
 ReactDOM.render(
   <React.StrictMode>
-    <PortfolioDashboard currency="GBP" availableAssets={availableAssets} />
+    <ConfigContext.Provider value={config}>
+      <PortfolioDashboard availableAssets={availableAssets} />
+    </ConfigContext.Provider>
   </React.StrictMode>, 
   document.getElementById("Portfolio")  
 )

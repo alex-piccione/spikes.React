@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./types"
 import DateAssetsView from "./DateAssetsView.component"
 import DateAssetsAdd from "./DateAssetsAdd.component"
@@ -8,9 +8,9 @@ import DateAssetsAdd from "./DateAssetsAdd.component"
 import ImageToggleOnScroll from "../spike.ImageToggleOnScroll"
 
 import { getDatePart } from "../../date utils"
+import { ConfigContext } from "../.."
 
 type DashboardProps = {
-  currency: string
   availableAssets: Asset[]
 }
 
@@ -23,7 +23,7 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
     super(props) 
     
     this.state = { portfolio: createInitialPortfolio() }
-  }
+  }  
 
   //addAsset(date:Date, asset:AssetAtDate) {
   addAsset = (date:Date, asset:AssetAtDate) => {   
@@ -56,7 +56,7 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
 
       <hr />
 
-      <div>Currency: {this.props.currency}</div>
+      <CurrencyInUse />
       <div><h2>Assets</h2></div>
       {this.state.portfolio.dates.map(d =>
         <DateAssetsView dateAssets={d} key={d.date.getUTCMilliseconds()} ></DateAssetsView>
@@ -65,4 +65,9 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
       <DateAssetsAdd availableAssets={this.props.availableAssets} add={this.addAsset}></DateAssetsAdd>
       </div>
   }
+}
+
+const CurrencyInUse = () => {
+  const config = useContext(ConfigContext)
+  return <div style={{float: "right"}}>Main currency: <strong>{config.currency}</strong></div>
 }
