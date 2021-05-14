@@ -47,14 +47,7 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
     return <div className="container">
       <h1>Portfolio</h1>
 
-      <div>React Hooks spikes</div>
-
-      {/*<InputField />*/}
-      {/*<ImageChangeOnMouseOver></ImageChangeOnMouseOver>*/}
-      {/*<UseEffect />*/}
-      <ImageToggleOnScroll />
-
-      <hr />
+      <Spikes show={false} />
 
       <CurrencyInUse />
       <div><h2>Assets</h2></div>
@@ -71,3 +64,15 @@ const CurrencyInUse = () => {
   const config = useContext(ConfigContext)
   return <div style={{float: "right"}}>Main currency: <strong>{config.currency}</strong></div>
 }
+
+
+const Spikes = (props:{show:boolean}) => (props.show ? <>     
+    <div>React Hooks spikes</div>
+
+    {/*<InputField />*/}
+    {/*<ImageChangeOnMouseOver></ImageChangeOnMouseOver>*/}
+    {/*<UseEffect />*/}
+    {/*<ImageToggleOnScroll />*/}
+
+    <hr />    
+</>:null)
