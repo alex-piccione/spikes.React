@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import "./CSS/index.css"
 import "./CSS/bootstrap.min.css"
+import "./CSS/index.scss"
 import { Game } from "./components/Game"
 import { AuthorQuiz } from "./components/AuthorQuiz"
 import { } from "./components/StopWatch"

@@ -1,3 +1,6 @@
+$space: 1rem;
+$primaryColor: rgb(0, 70, 117);
+
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
@@ -14,7 +17,7 @@ clear: both;
 }
 
 .status {
-  margin-bottom: 10px
+  margin-bottom: $space
 }
 
 .square {
@@ -55,12 +58,15 @@ code {
     monospace;
 }
 
+.marginBottom {
+  margin-bottom: $space;
+}
 
 
 /* Portfolio */
 
 .portfolio-date-container {
-  border: solid 1px rgb(120, 120, 130);
+  border: solid 1px lighten($color: $primaryColor, $amount: 0.5);
   border-radius: 3px;
 }
 
@@ -73,4 +79,10 @@ code {
 
 .portfolio-date-asset {
   background-color: rgb(240, 240, 255);
+}
+
+/* Bootstrap overrides */
+
+.card-title {
+  color: $primaryColor
 }

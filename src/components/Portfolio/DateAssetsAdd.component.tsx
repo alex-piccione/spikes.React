@@ -110,19 +110,22 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
   }
 
   render() {
-    return <div className="row">
-    <div className="col-auto">
-      <select className="form-control-sm" onChange={evt => this.selectAsset(evt.target.value)}>
-        <option>(select an asset)</option>
-        {this.props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
-      </select>
+    return <div className="card ">      
+      <div className="card-body row">
+        <h4 className="card-title marginBottom">Add values at date</h4>
+        <div className="col-auto">
+          <select className="form-control-sm" onChange={evt => this.selectAsset(evt.target.value)}>
+            <option>(select an asset)</option>
+            {this.props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
+          </select>
+        </div>
+        <div className="col-auto">
+          <input type="number" name="value" className="form-control-sm" onChange={evt => this.changeValue(evt.target.value)}></input>
+        </div>
+        <div className="col-auto">
+          <span onClick={this.add} className="btn btn-primary btn-sm">add Asset</span>
+        </div>
+      </div>
     </div>
-    <div className="col-auto">
-      <input type="number" name="value" className="form-control-sm" onChange={evt => this.changeValue(evt.target.value)}></input>
-    </div>
-    <div className="col-auto">
-      <span onClick={this.add} className="btn btn-primary btn-sm">add Asset</span>
-    </div>
-  </div>
   }
 }

@@ -45,18 +45,20 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
   
   render() {
     return <div className="container">
-      <h1>Portfolio</h1>
-
-      <Spikes show={false} />
-
+      <h1>Portfolio </h1>
       <CurrencyInUse />
-      <div><h2>Assets</h2></div>
+      
+      <Spikes show={false} />    
+
+      <h2>Assets</h2>
       {this.state.portfolio.dates.map(d =>
         <DateAssetsView dateAssets={d} key={d.date.getUTCMilliseconds()} ></DateAssetsView>
       )}
       <hr />
+      
       <DateAssetsAdd availableAssets={this.props.availableAssets} add={this.addAsset}></DateAssetsAdd>
-      </div>
+
+    </div>
   }
 }
 

@@ -11,6 +11,6 @@ export class Assets extends React.Component<AssetProps, DateAssets> {
   }
 
   render() {
-    return <div>Asset: {this.state.date}</div>
+    return <div className="card">Asset: {this.state.date}</div>
   }
 }
