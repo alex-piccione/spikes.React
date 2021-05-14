@@ -10,6 +10,20 @@ const ImageToggleOnScroll = () => {
   // when component is mounted
   // called after the page is rendered
   useEffect(() => {
+
+    const scrollHandler = () => {
+
+      const isInView = () => {
+        if (imageRef.current) {
+          const rect = imageRef.current.getBoundingClientRect()
+          return rect.top >= 0 && rect.bottom <= window.innerHeight
+        }
+        else return false
+      }
+
+      setInView(() => isInView())
+    }
+
     window.addEventListener("scroll", scrollHandler)
     //setInView(isInView())
     setIsLoading(false)
@@ -17,18 +31,6 @@ const ImageToggleOnScroll = () => {
       window.removeEventListener("scroll", scrollHandler)
     })
   }, [isLoading] )  // dependencies
-
-  const scrollHandler = () => {
-    setInView(() => isInView())
-  }
-
-  const isInView = () => {
-    if (imageRef.current) {
-      const rect = imageRef.current.getBoundingClientRect()
-      return rect.top >= 0 && rect.bottom <= window.innerHeight
-    }
-    else return false
-  }
 
   return (isLoading ? null : (<img alt="computer" src={ inView ? mainImage : bwImage } ref={imageRef} />))
 }
