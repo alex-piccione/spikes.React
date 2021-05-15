@@ -11,9 +11,9 @@ export default class DateAssetsView extends React.Component<DateViewProps, DateA
   }
 
   render() {
-    return <div className="portfolio-date-container">
-      <div className="portfolio-date">{this.state.date.toUTCString()}</div>
-      <div className="container portfolio-date-asset">
+    return <div className="card assetsview">
+      <div className="assetsview-date">{this.state.date.toLocaleDateString()}</div>
+      <div className="container assetsview-asset">
       {this.state.assets.map(asset => 
         <div key={asset.asset.code} className="row">
           <div className="col-sm">{asset.asset.code}</div>

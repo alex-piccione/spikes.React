@@ -27,6 +27,13 @@ export function createInitialPortfolio():Portfolio {
       { 
         date: new Date(), 
         assets: [
+          { asset: { name: "Pound", code: "GBP"}, amount:1500 },
+          { asset: { name: "Euro", code: "EUR"}, amount:4000 }
+        ]
+      },
+      {
+        date: new Date(2021, 2, 15),
+        assets: [
           { asset: { name: "Pound", code: "GBP"}, amount:1000 },
           { asset: { name: "Euro", code: "EUR"}, amount:2000 }
         ]

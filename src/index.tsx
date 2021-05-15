@@ -37,7 +37,8 @@ const availableAssets = [
 ]
 
 const config = {
-  currency: "GBP"
+  currency: "GBP",
+  dateFormat: "dd MMM yyyy"
 }
 export const ConfigContext = React.createContext(config)
 

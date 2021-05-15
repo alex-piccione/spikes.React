@@ -1,3 +1,8 @@
+//import { useContext } from "react"
+//import { ConfigContext } from "."
+
+//const config = useContext(ConfigContext)
+
 export function getDatePart(date:Date)  {
   //alert(date.toISOString())
   date.setHours(0)

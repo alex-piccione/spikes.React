@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React  from "react"
 import { Asset, AssetAtDate } from "./types"
 
 interface Props {
@@ -9,10 +9,9 @@ interface Props {
 interface State {
   date: Date | undefined
   newAsset: AssetAtDate | undefined
- // currentAssets: AssetAtDate[]
 }
 
-/// componente for adding assets on a specific date
+/// component for adding assets on a specific date
 export default class DateAssetsAdd extends React.Component<Props, State> {
   
   constructor(props:Props) {
@@ -25,13 +24,11 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
 
   resolveAsset = (code:String) => this.props.availableAssets.filter(x => x.code === code)[0]
 
-  availableAssets () {
+  availableAssets() {
     return this.props.availableAssets // TODO remove used assets
     // filter
   }
-
-  //addAsset(assetCode:string, value:number) {
-    
+   
   addAsset = (assetCode:string, value:number) => {
 
     if (this.state.date === undefined)
