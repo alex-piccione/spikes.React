@@ -31,7 +31,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   }
 
   //addAsset(assetCode:string, value:number) {
-    /*
+    
   addAsset = (assetCode:string, value:number) => {
 
     if (this.state.date === undefined)
@@ -45,7 +45,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     this.setState({newAsset: newAsset})
 
     this.props.add(this.state.date, newAsset)
-  }*/
+  }
 
   setDate = (date:Date|null) => this.setState({date: date||undefined})
 
@@ -53,12 +53,8 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     alert(message)
   }
 
-  render() {
-    //const [assets, setAssets] = useState(Array.of<Asset>())
-    /*const addAsset = (assetCode:string, value:number) => {
-      setAssets([...assets, this.resolveAsset(assetCode)])
-    }*/
 
+  render() {
     return <div className="card">
       <div className="card-body">
         <h4 className="card-title marginBottom">Add date record</h4>
@@ -71,29 +67,21 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
               onChange={evt => this.setDate(evt.target.valueAsDate)}></input>
           </div>
         </div>   
-        <NewAsset assets={this.availableAssets()} addNew={this.props.add} warning={this.warning}></NewAsset>     
+        <NewAsset assets={this.availableAssets()} add={ this.addAsset} warning={this.warning}></NewAsset>     
       </div>
     </div>
   }
 }
 
-const AssetsList = (props:{assets:Asset[]}) => {  
-  const {assets} = props;
-  return (<div>
-    <h6>Assets</h6>
-    {assets.length > 0 ? assets.map(a => (<div>asset</div>)): <div>(empty)</div> }
-  </div>)
-}
-
 interface NewAssetProps {
   assets:Asset[]
   warning: (message:string) => void
-  addNew:(assetCode:string, value:number) => void
+  add:(assetCode:string, amount:number) => void
 }
 
 interface NewAssetState {
   assetCode:string|undefined
-  value:number|undefined
+  amount:number|undefined
 }
 
 class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
@@ -102,7 +90,7 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
 
     this.state = {
       assetCode: undefined,
-      value: undefined
+      amount: undefined
     }
 
     this.changeValue = this.changeValue.bind(this)
@@ -111,13 +99,13 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
   add = () => {
     if (this.state.assetCode === undefined) 
       return this.props.warning("An Asset must be selected")
-    else if (this.state.value === undefined)
+    else if (this.state.amount === undefined)
       return this.props.warning("A value must be defined")
 
-    this.props.addNew(this.state.assetCode, this.state.value)
+    this.props.add(this.state.assetCode, this.state.amount)
   }
 
-  changeValue = (value:string) => this.setState({value: Number(value)}) 
+  changeValue = (value:string) => this.setState({amount: Number(value)}) 
 
   selectAsset = (value:string) => {
       this.setState({assetCode: value}) 
