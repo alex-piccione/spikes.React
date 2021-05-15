@@ -1,5 +1,6 @@
-$space: 1rem;
-$primaryColor: rgb(0, 70, 117);
+@import "config.sass";
+@import "bootstrap overrides.sass";
+@import "portfolio.sass";
 
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
@@ -58,31 +59,10 @@ code {
     monospace;
 }
 
+.marginTop {
+  margin-top: $space;
+}
+
 .marginBottom {
   margin-bottom: $space;
-}
-
-
-/* Portfolio */
-
-.portfolio-date-container {
-  border: solid 1px lighten($color: $primaryColor, $amount: 0.5);
-  border-radius: 3px;
-}
-
-.portfolio-date {
-  padding: 2px 5px;
-  font-size: large;
-  color: rgb(50, 50, 60);  
-  background-color: rgb(230, 230, 245);
-}
-
-.portfolio-date-asset {
-  background-color: rgb(240, 240, 255);
-}
-
-/* Bootstrap overrides */
-
-.card-title {
-  color: $primaryColor
 }
