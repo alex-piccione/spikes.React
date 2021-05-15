@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Asset, AssetAtDate } from "./types"
 
 interface Props {
@@ -31,6 +31,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   }
 
   //addAsset(assetCode:string, value:number) {
+    /*
   addAsset = (assetCode:string, value:number) => {
 
     if (this.state.date === undefined)
@@ -44,7 +45,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     this.setState({newAsset: newAsset})
 
     this.props.add(this.state.date, newAsset)
-  }
+  }*/
 
   setDate = (date:Date|null) => this.setState({date: date||undefined})
 
@@ -53,21 +54,35 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   }
 
   render() {
-    return <>
-      <div className="row">        
-        <div className="col-auto">
-          <label className="col-form-label">Date</label>          
-        </div>
-        <div className="col-auto">
-          <input type="date" className="form-control-sm" value={this.state.date && this.state.date.toUTCString()} 
-            onChange={evt => this.setDate(evt.target.valueAsDate)}></input>
-        </div>
+    //const [assets, setAssets] = useState(Array.of<Asset>())
+    /*const addAsset = (assetCode:string, value:number) => {
+      setAssets([...assets, this.resolveAsset(assetCode)])
+    }*/
+
+    return <div className="card">
+      <div className="card-body">
+        <h4 className="card-title marginBottom">Add date record</h4>
+        <div className="row">
+          <div className="col-auto">
+            <label className="col-form-label">Date</label>          
+          </div>
+          <div className="col-auto">
+            <input type="date" className="form-control-sm" value={this.state.date && this.state.date.toUTCString()} 
+              onChange={evt => this.setDate(evt.target.valueAsDate)}></input>
+          </div>
+        </div>   
+        <NewAsset assets={this.availableAssets()} addNew={this.props.add} warning={this.warning}></NewAsset>     
       </div>
-      <div className="input-group"></div>      
-      <div>Assets</div>
-      <NewAsset assets={this.availableAssets()} addNew={this.addAsset} warning={this.warning}></NewAsset>     
-    </>
+    </div>
   }
+}
+
+const AssetsList = (props:{assets:Asset[]}) => {  
+  const {assets} = props;
+  return (<div>
+    <h6>Assets</h6>
+    {assets.length > 0 ? assets.map(a => (<div>asset</div>)): <div>(empty)</div> }
+  </div>)
 }
 
 interface NewAssetProps {
@@ -99,7 +114,6 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
     else if (this.state.value === undefined)
       return this.props.warning("A value must be defined")
 
-    //alert(`add a value: ${this.state.value} ${this.state.assetCode}`)
     this.props.addNew(this.state.assetCode, this.state.value)
   }
 
@@ -110,22 +124,21 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
   }
 
   render() {
-    return <div className="card ">      
-      <div className="card-body row">
-        <h4 className="card-title marginBottom">Add values at date</h4>
-        <div className="col-auto">
-          <select className="form-control-sm" onChange={evt => this.selectAsset(evt.target.value)}>
-            <option>(select an asset)</option>
-            {this.props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
-          </select>
+    return <div className="marginTop">  
+        <div className="row justify-item-start">
+          <div className="col-auto">
+            <select className="form-control-sm" onChange={evt => this.selectAsset(evt.target.value)}>
+              <option>(select an asset)</option>
+              {this.props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
+            </select>
+          </div>
+          <div className="col-auto">
+            <input type="number" name="value" className="form-control-sm" onChange={evt => this.changeValue(evt.target.value)}></input>
+          </div>
+          <div className="col-auto">
+            <span onClick={this.add} className="btn btn-primary btn-sm">Add</span>
+          </div>
         </div>
-        <div className="col-auto">
-          <input type="number" name="value" className="form-control-sm" onChange={evt => this.changeValue(evt.target.value)}></input>
-        </div>
-        <div className="col-auto">
-          <span onClick={this.add} className="btn btn-primary btn-sm">add Asset</span>
-        </div>
-      </div>
     </div>
   }
 }

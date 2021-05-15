@@ -5,7 +5,7 @@ import DateAssetsAdd from "./DateAssetsAdd.component"
 //import InputField from "../Fields/InputField"
 //import ImageChangeOnMouseOver from "../spike.ImageChangeOnMouseOver"
 //import UseEffect from "../spike.UseEffect"
-import ImageToggleOnScroll from "../spike.ImageToggleOnScroll"
+//import ImageToggleOnScroll from "../spike.ImageToggleOnScroll"
 
 import { getDatePart } from "../../date utils"
 import { ConfigContext } from "../.."
@@ -49,11 +49,13 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
       <CurrencyInUse />
       
       <Spikes show={false} />    
-
+      
       <h2>Assets</h2>
-      {this.state.portfolio.dates.map(d =>
+      { this.state.portfolio.dates.length > 0 ?
+      this.state.portfolio.dates.map(d =>
         <DateAssetsView dateAssets={d} key={d.date.getUTCMilliseconds()} ></DateAssetsView>
-      )}
+      ) : <div className="body2">There are no dates.</div>
+      }
       <hr />
       
       <DateAssetsAdd availableAssets={this.props.availableAssets} add={this.addAsset}></DateAssetsAdd>
@@ -66,7 +68,6 @@ const CurrencyInUse = () => {
   const config = useContext(ConfigContext)
   return <div style={{float: "right"}}>Main currency: <strong>{config.currency}</strong></div>
 }
-
 
 const Spikes = (props:{show:boolean}) => (props.show ? <>     
     <div>React Hooks spikes</div>
