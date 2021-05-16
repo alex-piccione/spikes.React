@@ -1,7 +1,8 @@
 import React, { useContext } from "react"
 import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./types"
 import DateAssetsView from "./DateAssetsView.component"
-import DateAssetsAdd from "./DateAssetsAdd.component"
+import DateAssetsAdd, { TestDate } from "./DateAssetsAdd.component"
+import { Container } from "../spike.child"
 import { getDatePart } from "../../date utils"
 import { ConfigContext } from "../.."
 //import InputField from "../Fields/InputField"
@@ -10,18 +11,35 @@ import { ConfigContext } from "../.."
 //import ImageToggleOnScroll from "../spike.ImageToggleOnScroll"
 
 type DashboardProps = {
-  availableAssets: Asset[]
+  availableAssets: Asset[],
+  //dateClicked: (date:Date) => {}
 }
 
 type DashboardState = {
-  portfolio: Portfolio
+  portfolio: Portfolio, 
+  clickedDate: Date|undefined
 }
+
+var selectedDate:Date|undefined = undefined
+export function portfolioDateClicked(date:Date) {
+  selectedDate = date
+}
+
 
 export default class PortfolioDashboard extends React.Component<DashboardProps, DashboardState> {
   constructor(props:DashboardProps) {
     super(props) 
     
-    this.state = { portfolio: createInitialPortfolio() }
+    this.state = { portfolio: createInitialPortfolio(), clickedDate: undefined  }
+  }  
+
+  dateClicked = (date:Date) => {
+    portfolioDateClicked(date)
+//    updateState(date)
+    //this.setState({date})
+    this.setState({clickedDate: date})   
+    //alert(date)
+
   }  
 
   //addAsset(date:Date, asset:AssetAtDate) {
@@ -47,17 +65,19 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
       <h1>Portfolio </h1>
       <CurrencyInUse />
       
-      <Spikes show={false} />    
+      <Spikes show={false} /> 
+
+      { false && <Container /> }
       
       <h2>Assets</h2>
       { this.state.portfolio.dates.length > 0 ?
       this.state.portfolio.dates.map(d =>
-        <DateAssetsView dateAssets={d} key={d.date.getUTCMilliseconds()} ></DateAssetsView>
+        <DateAssetsView key={d.date.getTime()} dateAssets={d} dateClicked={() => this.dateClicked(d.date) } ></DateAssetsView>
       ) : <div className="body2">There are no dates.</div>
       }
       <hr />
-      
-      <DateAssetsAdd availableAssets={this.props.availableAssets} add={this.addAsset}></DateAssetsAdd>
+      { false && <TestDate initilaDate={this.state.clickedDate||new Date()} /> }
+      <DateAssetsAdd availableAssets={this.props.availableAssets} selectedDate={this.state.clickedDate||new Date()} add={this.addAsset}></DateAssetsAdd>
 
     </div>
   }
