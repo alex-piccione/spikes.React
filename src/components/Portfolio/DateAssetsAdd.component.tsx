@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css"
 import { Asset, AssetAtDate } from "./types"
 import {single} from "../../utils"
 import { calculateDateFormat } from "../../date utils" 
+import { SelectedDateContext } from "./Dashboard"
+import AmountField from "../Fields/AmountField"
 
 const dateFormat = calculateDateFormat()
 
@@ -90,7 +92,8 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   dateChanged = (date:Date|null) => this.setState({date: date||undefined})
 
   render() {
-    return <div className="card">
+    return <SelectedDateContext.Provider value={undefined}>
+      <div className="card">
       {/* date: {this.props.selectedDate?.toJSON().substr(0, 10)} */}
       <div className="card-body">
         <h4 className="card-title marginBottom">Add date record</h4>
@@ -115,6 +118,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
         <NewAsset assets={this.availableAssets()} add={ this.addAsset} warning={this.warning}></NewAsset>     
       </div>
     </div>
+    </SelectedDateContext.Provider>
   }
 }
 
@@ -151,6 +155,7 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
   }
 
   changeValue = (value:string) => this.setState({amount: Number(value)}) 
+  changeAmount = (value:number|undefined) => this.setState({amount: value}) 
 
   selectAsset = (value:string) => {
       this.setState({assetCode: value}) 
@@ -172,6 +177,7 @@ class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
             <label className="col-form-label">Amount</label>          
           </div>
           <div className="col-auto">
+            <AmountField isEditing={true} onChange={ this.changeAmount} />
             <input type="number" name="value" className="form-control form-control-sm" onChange={evt => this.changeValue(evt.target.value)}></input>
           </div>
           <div className="col-auto">

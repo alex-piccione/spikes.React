@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { createContext, useContext } from "react"
 import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./types"
 import DateAssetsView from "./DateAssetsView.component"
 import DateAssetsAdd, { TestDate } from "./DateAssetsAdd.component"
@@ -9,6 +9,9 @@ import { ConfigContext } from "../.."
 //import ImageChangeOnMouseOver from "../spike.ImageChangeOnMouseOver"
 //import UseEffect from "../spike.UseEffect"
 //import ImageToggleOnScroll from "../spike.ImageToggleOnScroll"
+
+// try useContext for passing the selected date
+export const SelectedDateContext = createContext(undefined)
 
 type DashboardProps = {
   availableAssets: Asset[],
@@ -39,7 +42,6 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
     //this.setState({date})
     this.setState({clickedDate: date})   
     //alert(date)
-
   }  
 
   //addAsset(date:Date, asset:AssetAtDate) {
