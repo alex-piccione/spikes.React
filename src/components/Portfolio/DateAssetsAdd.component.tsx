@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useReducer, useState } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { Asset, AssetAtDate } from "./types"
@@ -115,6 +115,8 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
               */}
           </div>
         </div>   
+        <AssetAmountField assets={this.availableAssets()} add={ this.addAsset} warning={this.warning} />
+
         <NewAsset assets={this.availableAssets()} add={ this.addAsset} warning={this.warning}></NewAsset>     
       </div>
     </div>
@@ -131,6 +133,52 @@ interface NewAssetProps {
 interface NewAssetState {
   assetCode:string|undefined
   amount:number|undefined
+}
+
+const AssetAmountField = (props:NewAssetProps) => { 
+
+  function assetReducer(state:any, action: {type:string, data:string}) {
+    switch(action.type) {
+      case "asset": {
+        return action.data
+      }
+      default:  return state
+    }
+  }
+
+  const [asset, dispatch] = useReducer(assetReducer, [])
+
+  const add = () => {
+    /*if (this.state.assetCode === undefined) 
+      return this.props.warning("An Asset must be selected")
+    else if (this.state.amount === undefined)
+      return this.props.warning("A value must be defined")*/
+
+    //props.add(state.assetCode, state.amount)
+  }
+
+  return  <div className="marginTop">  
+  <div className="row justify-item-start">
+    <div className="col-auto">
+      <label className="col-form-label">Asset</label>          
+    </div>
+    <div className="col-auto">
+      <select className="form-control form-control-sm" onChange={evt => dispatch({type: "asset", data: evt.target.value})}>
+        <option>(select an asset)</option>
+        {props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
+      </select>
+    </div>
+    <div className="col-auto">
+      <label className="col-form-label">Amount</label>          
+    </div>
+    <div className="col-auto">
+      <AmountField isEditing={true} onChange={(value) => dispatch({type:"amnount", data:""})} />
+    </div>
+    <div className="col-auto">
+      <span onClick={add} className="btn btn-primary btn-sm">Add</span>
+    </div>
+  </div>
+</div>
 }
 
 class NewAsset extends React.Component<NewAssetProps, NewAssetState> {

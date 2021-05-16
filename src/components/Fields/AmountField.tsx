@@ -29,7 +29,7 @@ const AmountField = (props:Props) => {
         <input type="number" className="form-control form-control-sm" defaultValue="0" 
           onChange={evt => { props.onChange(evt.target.valueAsNumber); setAmount({type:"amount", data: evt.target.valueAsNumber}) /*setAmount(evt.target.valueAsNumber);*/ }} style={{ display: "inline"}} />
       </div>
-      <div className="col-auto" style={{ display: "flex", fontSize: "75%"}}>{amount}</div>
+      <div className="col-auto" style={{ display: "flex", alignItems: "center", paddingLeft:0, fontSize: "75%"}}>{amount}</div>
       </div>) :
     <div>{amount}</div>  
 }
