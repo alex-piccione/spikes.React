@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import { BrowserRouter, Switch, Route} from "react-router-dom"
 import ReactDOM from "react-dom"
 import "./CSS/bootstrap.min.css"
 import "./CSS/index.scss"
@@ -7,6 +8,13 @@ import { AuthorQuiz } from "./components/AuthorQuiz"
 import { } from "./components/StopWatch"
 import { Sum } from "./components/Sum & Number"
 import PortfolioDashboard from "./components/Portfolio/Dashboard"
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Game />
+  </React.StrictMode>, 
+  document.getElementById("game")  
+)
 
 ReactDOM.render(
   <React.StrictMode>
@@ -43,10 +51,22 @@ const config = {
 export const ConfigContext = React.createContext(config)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ConfigContext.Provider value={config}>
-      <PortfolioDashboard availableAssets={availableAssets} />
-    </ConfigContext.Provider>
-  </React.StrictMode>, 
+  <App />, 
   document.getElementById("Portfolio")  
 )
+
+function App() {
+  return (
+      <BrowserRouter>
+        <Switch>
+          <Route path="/">
+          <React.StrictMode>
+            <ConfigContext.Provider value={config}>
+              <PortfolioDashboard availableAssets={availableAssets} />
+            </ConfigContext.Provider>
+          </React.StrictMode>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+  )
+}
