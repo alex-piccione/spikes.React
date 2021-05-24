@@ -30,7 +30,7 @@ const ImageToggleOnScroll = () => {
     return( () => {
       window.removeEventListener("scroll", scrollHandler)
     })
-  }, [isLoading] )  // dependencies
+  }, [isLoading] )  // dependencies: nyll -> runs on every state change, empty -> runs only first time, values -> runs when any of the dependency change
 
   return (isLoading ? null : (<img alt="computer" src={ inView ? mainImage : bwImage } ref={imageRef} />))
 }
