@@ -1,14 +1,17 @@
 import React from "react";
-import { BrowserRouter, Switch, Route} from "react-router-dom"
 import ReactDOM from "react-dom"
+import { BrowserRouter, Switch, Route} from "react-router-dom"
+
 import "./CSS/bootstrap.min.css"
 import "./CSS/index.scss"
-import { Game } from "./components/Game/Game"
-import { AuthorQuiz } from "./components/AuthorQuiz"
-import { } from "./components/StopWatch"
-import { Sum } from "./components/Sum & Number"
+
 import PortfolioDashboard from "./components/Portfolio/Dashboard"
 import Header from "./components/Header";
+import { Game } from "./components/Game/Game"
+import { AuthorQuiz } from "./components/AuthorQuiz"
+import { Sum } from "./components/Sum & Number"
+import { } from "./components/StopWatch"
+import Spikes from "./components/Spikes/Spikes"
 
 const availableAssets = [
   { name: "Pound", code: "GBP"},
@@ -33,7 +36,8 @@ function App() {
   const pages = [
     { url:"/portfolio", name:"Portfolio"},
     { url:"/sum", name:"Sum"},
-    { url:"/game", name:"Game"}
+    { url:"/game", name:"Game"},
+    { url:"/spikes", name:"Spikes"}
   ]
 
   return (<div>    
@@ -41,7 +45,7 @@ function App() {
       <BrowserRouter>
         <Header pages={pages} />
         <div id="body">
-          <Switch>          
+          <Switch>
             <Route path="/sum">            
               <Sum a={0} b={0} />
             </Route>
@@ -53,6 +57,9 @@ function App() {
             </Route>
             <Route path="/quiz">   
               <AuthorQuiz />
+            </Route>
+            <Route path="/spikes">   
+              <Spikes />
             </Route>
             <Route path="/">
               <ConfigContext.Provider value={config}>
