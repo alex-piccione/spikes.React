@@ -2,13 +2,8 @@ import React, { createContext, useContext } from "react"
 import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./types"
 import DateAssetsView from "./DateAssetsView.component"
 import DateAssetsAdd, { TestDate } from "./DateAssetsAdd.component"
-import { Container } from "../spike.child"
 import { getDatePart } from "../../date utils"
 import { ConfigContext } from "../.."
-//import InputField from "../Fields/InputField"
-//import ImageChangeOnMouseOver from "../spike.ImageChangeOnMouseOver"
-//import UseEffect from "../spike.UseEffect"
-//import ImageToggleOnScroll from "../spike.ImageToggleOnScroll"
 
 // try useContext for passing the selected date
 export const SelectedDateContext = createContext(undefined)
@@ -73,12 +68,8 @@ export default class PortfolioDashboard extends React.Component<Props, State> {
   render() {
     return <div className="container">
       <h1>Portfolio </h1>
-      <CurrencyInUse />
-      
-      <Spikes show={false} /> 
+      <CurrencyInUse />  
 
-      { false && <Container /> }
-      
       <h2>Assets</h2>
       { this.state.portfolio.dates.length > 0 ?
       this.state.portfolio.dates.map(d =>
@@ -100,14 +91,3 @@ const CurrencyInUse = () => {
   const config = useContext(ConfigContext)
   return <div style={{float: "right"}}>Main currency: <strong>{config.currency}</strong></div>
 }
-
-const Spikes = (props:{show:boolean}) => (props.show ? <>     
-    <div>React Hooks spikes</div>
-
-    {/*<InputField />*/}
-    {/*<ImageChangeOnMouseOver></ImageChangeOnMouseOver>*/}
-    {/*<UseEffect />*/}
-    {/*<ImageToggleOnScroll />*/}
-
-    <hr />    
-</>:null)

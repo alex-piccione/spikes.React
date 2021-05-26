@@ -1,5 +1,4 @@
 import React from "react"
-import { setConstantValue } from "typescript"
 
 const dates = [
   new Date(2000, 0, 1),
