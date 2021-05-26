@@ -10,8 +10,9 @@ import Header from "./components/Header";
 import { Game } from "./components/Game/Game"
 import { AuthorQuiz } from "./components/AuthorQuiz"
 import { Sum } from "./components/Sum & Number"
+import Spikes from "./components/Spikes/Spikes.page"
 import { } from "./components/StopWatch"
-import Spikes from "./components/Spikes/Spikes"
+
 
 const availableAssets = [
   { name: "Pound", code: "GBP"},
