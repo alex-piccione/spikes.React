@@ -9,7 +9,8 @@ const Spikes = () => <>
 
   <InputField />
   <hr/>
-  <ImageChangeOnMouseOver></ImageChangeOnMouseOver>
+  Image with "mouse over"/"mouse out" events
+  <ImageChangeOnMouseOver />
   <hr/>
   <UseEffect />
   <hr/>

@@ -11,7 +11,7 @@ ol, ul {
   padding: 30px;
 }
 
-.clickable {cursor: pointer}
+.clickable, .click-me {cursor: pointer}
 
 .board-row:after {
 clear: both;
