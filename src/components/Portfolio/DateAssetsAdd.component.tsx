@@ -5,7 +5,7 @@ import { Asset, AssetAtDate } from "./types"
 import {single} from "../../utils"
 import { calculateDateFormat } from "../../date utils" 
 import { SelectedDateContext } from "./Dashboard"
-import AmountField from "../Fields/AmountField"
+import {AmountField, DatePicker as MyDatePicker} from "../Fields/index"
 
 const dateFormat = calculateDateFormat()
 
@@ -78,9 +78,9 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     this.props.add(this.state.date, newAsset)
   }
 
-  setDate = (dates:Date|Date[]|null) => {
-    alert("setdate")
-    const date = dates === null ? undefined : single<Date>(dates)
+  setDate = (date:Date|undefined) => {
+    //alert("setdate")
+    //const date = date === null ? undefined : single<Date>(dates)
     this.setState({date: date||undefined})
   }
 
@@ -102,11 +102,14 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
             <label className="col-form-label">Date</label>          
           </div>
           <div className="col-auto">
-
+            <MyDatePicker onChange={d => this.setDate(d)} />
             {false && <input type="date" onChange={ evt => this.dateChanged(evt.target.valueAsDate)} defaultValue={this.state.date?.toJSON().substr(0, 10) || ""} /> }
 
+            
+
+            {/*
             <DatePicker selected={this.state.date} onChange={(date) => this.setDate(date)} dateFormat={dateFormat} className="form-control form-control-sm" />
-            {/* 
+             
             <input id="selectedDate" type="date" className="form-control form-control-sm"   name="aa"          
             defaultValue={ (this.props.selectedDate || new Date()).toISOString().substring(0, 10)}></input>
             <input type="date" className="form-control form-control-sm"             

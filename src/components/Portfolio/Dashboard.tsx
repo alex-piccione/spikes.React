@@ -18,9 +18,9 @@ type DashboardState = {
   clickedDate: Date|undefined
 }
 
-var selectedDate:Date|undefined = undefined
+//var selectedDate:Date|undefined = undefined
 export function portfolioDateClicked(date:Date) {
-  selectedDate = date
+  //selectedDate = date
 }
 
 
