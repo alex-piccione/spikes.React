@@ -64,6 +64,11 @@ export default class PortfolioDashboard extends React.Component<Props, State> {
     this.setState({isAddVisible: true})
     // TODO start timer
   }
+
+  hideAdd = (event:any) => {
+    this.setState({isAddVisible: false})
+    // TODO reset timer
+  }
   
   render() {
     return <div className="container">
@@ -80,7 +85,9 @@ export default class PortfolioDashboard extends React.Component<Props, State> {
       { false && <TestDate initilaDate={this.state.clickedDate||new Date()} /> }
       { !this.state.isAddVisible && <button className="btn btn-primary btn-sm" onClick={this.showAdd}>Add</button>}
       { this.state.isAddVisible && 
-        <DateAssetsAdd availableAssets={this.props.availableAssets} selectedDate={this.state.clickedDate||new Date()} add={this.addAsset}></DateAssetsAdd>
+        <DateAssetsAdd availableAssets={this.props.availableAssets}
+          selectedDate={this.state.clickedDate||new Date()} 
+          add={this.addAsset} close={this.hideAdd} />
       }
 
     </div>

@@ -68,3 +68,8 @@ code {
 .marginBottom {
   margin-bottom: $space;
 }
+
+.buttonRow {
+  display: flex;
+  flex-direction: row-reverse;
+}
