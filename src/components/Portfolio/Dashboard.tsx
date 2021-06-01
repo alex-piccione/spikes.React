@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react"
 import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./types"
-import DateAssetsView from "./DateAssetsView.component"
-import DateAssetsAdd, { TestDate } from "./DateAssetsAdd.component"
+import DateAssetsView from "./DateAssetsView"
+import DateAssetsAdd, { TestDate } from "./DateAssetsAdd"
 import { getDatePart } from "../../date utils"
 import { ConfigContext } from "../.."
 
@@ -23,7 +23,6 @@ export function portfolioDateClicked(date:Date) {
   //selectedDate = date
 }
 
-
 export default class PortfolioDashboard extends React.Component<DashboardProps, DashboardState> {
   constructor(props:DashboardProps) {
     super(props) 
@@ -33,13 +32,9 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
 
   dateClicked = (date:Date) => {
     portfolioDateClicked(date)
-//    updateState(date)
-    //this.setState({date})
     this.setState({clickedDate: date})   
-    //alert(date)
   }  
 
-  //addAsset(date:Date, asset:AssetAtDate) {
   addAsset = (date:Date, asset:AssetAtDate) => {   
 
     let portfolio = this.state.portfolio   
@@ -70,7 +65,7 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
       }
       <hr />
       { false && <TestDate initilaDate={this.state.clickedDate||new Date()} /> }
-      <DateAssetsAdd availableAssets={this.props.availableAssets} selectedDate={this.state.clickedDate||new Date()} add={this.addAsset}></DateAssetsAdd>
+      <DateAssetsAdd availableAssets={this.props.availableAssets} selectedDate={this.state.clickedDate||new Date()} add={this.addAsset} />
 
     </div>
   }

@@ -42,7 +42,8 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     } 
   }
 
-  static getDerivedStateFromProps(props:Props, state:State) {    
+  static getDerivedStateFromProps(props:Props, state:State) {  
+    console.log("props.selectedDate changed: " + props.selectedDate)  
     state.date = props.selectedDate || new Date()
     return state
     // date.return {...state, date: props.selectedDate]}
@@ -91,11 +92,15 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
               <label className="col-form-label">Date</label>          
             </div>
             <div className="col-auto">
-              <DatePicker onChange={date => this.setDate(date)} />
+              <DatePicker onChange={date => this.setDate(date)} class="form-control form-control-sm" />
             </div>
-          </div>   
-          <AssetAmountField assets={this.availableAssets()} add={ this.addAsset} warning={this.warning} />
-          <NewAsset assets={this.availableAssets()} add={ this.addAsset} warning={this.warning}></NewAsset>     
+          </div> 
+          <div className="row">
+              <AssetAndAmountFields assets={this.availableAssets()} add={ this.addAsset } warning={this.warning} />           
+          </div>           
+          <div className="row">
+            <div></div>
+          </div>
         </div>
       </div>
     </SelectedDateContext.Provider>
@@ -105,15 +110,11 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
 interface NewAssetProps {
   assets:Asset[]
   warning: (message:string) => void
+  //validate:(assetCode:string, amount:number|undefined) => boolean
   add:(assetCode:string, amount:number) => void
 }
 
-interface NewAssetState {
-  assetCode:string|undefined
-  amount:number|undefined
-}
-
-const AssetAmountField = (props:NewAssetProps) => { 
+const AssetAndAmountFields = (props:NewAssetProps) => { 
 
   function assetReducer(state:any, action: {type:string, data:string}) {
     switch(action.type) {
@@ -125,8 +126,14 @@ const AssetAmountField = (props:NewAssetProps) => {
   }
 
   const [asset, dispatch] = useReducer(assetReducer, [])
+  const [amount, setAmount] = useState<number|undefined>(0)
 
   const add = () => {
+    
+    /*if (props.validate(asset, amount)) {
+
+    }*/
+
     /*if (this.state.assetCode === undefined) 
       return this.props.warning("An Asset must be selected")
     else if (this.state.amount === undefined)
@@ -150,66 +157,11 @@ const AssetAmountField = (props:NewAssetProps) => {
       <label className="col-form-label">Amount</label>          
     </div>
     <div className="col-auto">
-      <AmountField isEditing={true} onChange={(value) => dispatch({type:"amnount", data:""})} />
+      <AmountField isEditing={true} onChange={(value) => setAmount(value)} />
     </div>
     <div className="col-auto">
       <span onClick={add} className="btn btn-primary btn-sm">Add</span>
     </div>
   </div>
 </div>
-}
-
-class NewAsset extends React.Component<NewAssetProps, NewAssetState> {
-  constructor(props:NewAssetProps) {
-    super(props)
-
-    this.state = {
-      assetCode: undefined,
-      amount: undefined
-    }
-
-    this.changeValue = this.changeValue.bind(this)
-  }
-
-  add = () => {
-    if (this.state.assetCode === undefined) 
-      return this.props.warning("An Asset must be selected")
-    else if (this.state.amount === undefined)
-      return this.props.warning("A value must be defined")
-
-    this.props.add(this.state.assetCode, this.state.amount)
-  }
-
-  changeValue = (value:string) => this.setState({amount: Number(value)}) 
-  changeAmount = (value:number|undefined) => this.setState({amount: value}) 
-
-  selectAsset = (value:string) => {
-      this.setState({assetCode: value}) 
-  }
-
-  render() {
-    return <div className="marginTop">  
-        <div className="row justify-item-start">
-          <div className="col-auto">
-            <label className="col-form-label">Asset</label>          
-          </div>
-          <div className="col-auto">
-            <select className="form-control form-control-sm" onChange={evt => this.selectAsset(evt.target.value)}>
-              <option>(select an asset)</option>
-              {this.props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
-            </select>
-          </div>
-          <div className="col-auto">
-            <label className="col-form-label">Amount</label>          
-          </div>
-          <div className="col-auto">
-            <AmountField isEditing={true} onChange={ this.changeAmount} />
-            <input type="number" name="value" className="form-control form-control-sm" onChange={evt => this.changeValue(evt.target.value)}></input>
-          </div>
-          <div className="col-auto">
-            <span onClick={this.add} className="btn btn-primary btn-sm">Add</span>
-          </div>
-        </div>
-    </div>
-  }
 }

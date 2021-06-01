@@ -13,11 +13,13 @@ registerLocale(userLocale, fns_locale)
 
 interface Props {
   onChange: (date:Date|undefined) => void  
+  class?: string
 }
 
 
 const MyDatePicker = (props:Props) => {
   const [date, setDate] = useState(new Date())
+  const defaultClass = "form-control"
   
   function onChange (dates: Date|[Date,Date], evt:React.SyntheticEvent<any, Event>) {
     console.log(dates)    
@@ -31,9 +33,9 @@ const MyDatePicker = (props:Props) => {
       throw new Error(`Selection must be a "Date", it is "${typeof date}" instead.`);    
   }
 
-  return (<>  
+  return (<>      
     {/* P = date   PP = date & time */} 
-    <DatePicker onChange={onChange} selected={date} locale={userLocale} dateFormat="P" /> Locale: {userLocale}
+    <DatePicker onChange={onChange} selected={date} locale={userLocale} dateFormat="P"  className={props.class||defaultClass}/> Locale: {userLocale}
     </>)
 }
 
