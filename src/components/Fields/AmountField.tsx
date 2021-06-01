@@ -1,6 +1,6 @@
 // spike for useReducer Hook
 
-import { useReducer, useState } from "react"
+import { useReducer } from "react"
 
 interface Props {
   isEditing:boolean,

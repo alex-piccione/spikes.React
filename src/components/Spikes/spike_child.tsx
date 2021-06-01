@@ -17,8 +17,11 @@ export class Container extends React.Component<any, {selectedDate:Date|undefined
 
   render() {
     return (<>
+    <h4>List of dates</h4>
+    Select a date to be set as initial date:
       <DateList dateSelected={(date) => this.setState({selectedDate:date}) } />
-      <div>{this.state.selectedDate?.toLocaleDateString()||"n.a."}</div>
+      <div>Selected initial date: {this.state.selectedDate?.toLocaleDateString()||"n.a."}</div>
+    <h4>Date field</h4>
       <SingleItem initialDate={this.state.selectedDate} />
       </>
     )
@@ -41,7 +44,7 @@ export class DateList extends React.Component<ListProps, {selectedDate:Date|unde
   }
 
   render() {
-    return dates.map(d => <li key={d.getTime()} onClick={() => this.props.dateSelected(d)} >{d.toLocaleDateString()}</li>)
+    return dates.map(d => <li key={d.getTime()} className="click-me" onClick={() => this.props.dateSelected(d)} >{d.toLocaleDateString()}</li>)
   }
 }
 
@@ -75,9 +78,17 @@ export class SingleItem extends React.Component<SingleItemProps, {initialDate:Da
     const d = (date:Date|undefined) => date === undefined ? "n.a." : date.toLocaleDateString()
     return (
       <div>
+<ul>
+  <li>Date field allows to select the date with a visual calendar</li>
+  <li>Date field is populate with an initial date</li>
+  <li>Date field value change when user select a date from the calendar</li>
+  <li>Date field value change when user manually enter a date</li>
+</ul>
+
         <div>Initial date: {d(this.props.initialDate)} (from props)</div>
         <div>Initial date: {d(this.state.initialDate)}</div>
         <div>Selected date: {d(this.state.selectedDate)}</div>
+        <span>Select date:</span>
         <input value={this.state.initialDate.toLocaleDateString()} readOnly={true} />
         <button onClick={() => this.forceUpdate()}>button</button>
       </div>
