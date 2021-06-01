@@ -3,7 +3,7 @@ import ImageChangeOnMouseOver from "./spike.ImageChangeOnMouseOver"
 import UseEffect from "./spike.UseEffect"
 import ImageToggleOnScroll from "./spike.ImageToggleOnScroll"
 import { Container } from "./spike.child"
-import {DatePicker} from "../../components/Fields/index"
+import { DatePicker } from "../../components/Fields/index"
 
 const Spikes = () => <>     
   <h1>React Hooks spikes</h1>

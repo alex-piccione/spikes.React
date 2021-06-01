@@ -1,11 +1,9 @@
 import React, { useReducer, useState } from "react"
-import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { Asset, AssetAtDate } from "./types"
-import {single} from "../../utils"
 import { calculateDateFormat } from "../../date utils" 
 import { SelectedDateContext } from "./Dashboard"
-import {AmountField, DatePicker as MyDatePicker} from "../Fields/index"
+import { AmountField, DatePicker } from "../Fields/index"
 
 const dateFormat = calculateDateFormat()
 
@@ -38,13 +36,10 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   
   constructor(props:Props) {
     super(props)   
-    //alert(`set date: ${this.props.selectedDate.toJSON().substr(0, 10)}`) 
     this.state = {
       date: this.props.selectedDate,
       newAsset: undefined
     } 
-
-    //const a = portfolioDateClicked.bind(this.props.selectedDate) // = (date:Date) => this.setDate(date)
   }
 
   static getDerivedStateFromProps(props:Props, state:State) {    
@@ -79,8 +74,6 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   }
 
   setDate = (date:Date|undefined) => {
-    //alert("setdate")
-    //const date = date === null ? undefined : single<Date>(dates)
     this.setState({date: date||undefined})
   }
 
@@ -88,41 +81,23 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     alert(message)
   }
   
-  logDate = (date:Date|null) => console.log(date)
-  dateChanged = (date:Date|null) => this.setState({date: date||undefined})
-
   render() {
     return <SelectedDateContext.Provider value={undefined}>
       <div className="card">
-      {/* date: {this.props.selectedDate?.toJSON().substr(0, 10)} */}
-      <div className="card-body">
-        <h4 className="card-title marginBottom">Add date record</h4>
-        <div className="row">
-          <div className="col-auto">
-            <label className="col-form-label">Date</label>          
-          </div>
-          <div className="col-auto">
-            <MyDatePicker onChange={d => this.setDate(d)} />
-            {false && <input type="date" onChange={ evt => this.dateChanged(evt.target.valueAsDate)} defaultValue={this.state.date?.toJSON().substr(0, 10) || ""} /> }
-
-            
-
-            {/*
-            <DatePicker selected={this.state.date} onChange={(date) => this.setDate(date)} dateFormat={dateFormat} className="form-control form-control-sm" />
-             
-            <input id="selectedDate" type="date" className="form-control form-control-sm"   name="aa"          
-            defaultValue={ (this.props.selectedDate || new Date()).toISOString().substring(0, 10)}></input>
-            <input type="date" className="form-control form-control-sm"             
-              defaultValue={ (this.props.selectedDate || new Date()).toISOString().substring(0, 10)}
-              onChange={evt => this.setDate(evt.target.valueAsDate)}></input>
-              */}
-          </div>
-        </div>   
-        <AssetAmountField assets={this.availableAssets()} add={ this.addAsset} warning={this.warning} />
-
-        <NewAsset assets={this.availableAssets()} add={ this.addAsset} warning={this.warning}></NewAsset>     
+        <div className="card-body">
+          <h4 className="card-title marginBottom">Add date record</h4>
+          <div className="row">
+            <div className="col-auto">
+              <label className="col-form-label">Date</label>          
+            </div>
+            <div className="col-auto">
+              <DatePicker onChange={date => this.setDate(date)} />
+            </div>
+          </div>   
+          <AssetAmountField assets={this.availableAssets()} add={ this.addAsset} warning={this.warning} />
+          <NewAsset assets={this.availableAssets()} add={ this.addAsset} warning={this.warning}></NewAsset>     
+        </div>
       </div>
-    </div>
     </SelectedDateContext.Provider>
   }
 }
