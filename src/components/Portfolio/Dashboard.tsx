@@ -1,9 +1,23 @@
-import React, { createContext, useContext } from "react"
+import React, { createContext, useContext, useState } from "react"
 import { Asset, DateAssets, Portfolio, createInitialPortfolio, AssetAtDate } from "./types"
 import DateAssetsView from "./DateAssetsView"
-import DateAssetsAdd, { TestDate } from "./DateAssetsAdd"
+import DateAssetsAdd from "./DateAssetsAdd"
 import { getDatePart } from "../../date utils"
 import { ConfigContext } from "../.."
+
+
+// https://stackoverflow.com/questions/67559347/react-input-field-updated-by-props-change
+export function TestDate(props:{initilaDate:Date|undefined}) {
+  const dateString = props.initilaDate?.toISOString().substr(0, 10) || "" 
+  const [selectedDate, setDate] = useState(props.initilaDate)
+
+  return <>
+    <div>Initial: {dateString} | Selected: {selectedDate?.toLocaleDateString()||""}</div>
+    <div>Date1: <input type="date" defaultValue={dateString} value={dateString}  /></div>
+    <div>Date2: <input type="date" defaultValue={dateString} value={selectedDate?.toJSON().substr(0, 10)} 
+      onChange={evt => setDate(evt.target.valueAsDate || undefined)} /></div>
+  </>
+}
 
 // try useContext for passing the selected date
 export const SelectedDateContext = createContext(undefined)

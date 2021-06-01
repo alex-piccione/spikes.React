@@ -1,24 +1,9 @@
 import React, { useReducer, useState } from "react"
 import "react-datepicker/dist/react-datepicker.css"
 import { Asset, AssetAtDate } from "./types"
-import { calculateDateFormat } from "../../date utils" 
 import { SelectedDateContext } from "./Dashboard"
 import { AmountField, DatePicker } from "../Fields/index"
-
-const dateFormat = calculateDateFormat()
-
-// https://stackoverflow.com/questions/67559347/react-input-field-updated-by-props-change
-export function TestDate(props:{initilaDate:Date|undefined}) {
-  const dateString = props.initilaDate?.toISOString().substr(0, 10) || "" 
-  const [selectedDate, setDate] = useState(props.initilaDate)
-
-  return <>
-    <div>Initial: {dateString} | Selected: {selectedDate?.toLocaleDateString()||""}</div>
-    <div>Date1: <input type="date" defaultValue={dateString} value={dateString}  /></div>
-    <div>Date2: <input type="date" defaultValue={dateString} value={selectedDate?.toJSON().substr(0, 10)} 
-      onChange={evt => setDate(evt.target.valueAsDate || undefined)} /></div>
-  </>
-}
+import { isSetAccessorDeclaration } from "typescript"
 
 interface Props {
   availableAssets: Asset[],
@@ -101,20 +86,25 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
               <AssetAndAmountFields assets={this.availableAssets()} add={ this.addAsset } warning={this.warning} />           
           </div>           
   
-          <div className="buttonRow">
-            <span className="btn btn-sm btn-danger" onClick={this.props.close}>Close</span> 
-
+          <div className="buttonsRow">
+            <span className="btn btn-sm btn-danger" onClick={this.props.close}>Close</span>       
+            <span onClick={this.add} className="btn btn-primary btn-sm">Save</span>
           </div>
         </div>
       </div>
     </SelectedDateContext.Provider>
   }
+
+  // TODO
+  add() {
+    alert("add")
+  }
+
 }
 
 interface NewAssetProps {
   assets:Asset[]
   warning: (message:string) => void
-  //validate:(assetCode:string, amount:number|undefined) => boolean
   add:(assetCode:string, amount:number) => void
 }
 
@@ -129,21 +119,20 @@ const AssetAndAmountFields = (props:NewAssetProps) => {
     }
   }
 
-  const [asset, dispatch] = useReducer(assetReducer, [])
+  //const [asset, dispatch] = useReducer(assetReducer, [])
+  const [asset, setAsset] = useState("")
   const [amount, setAmount] = useState<number|undefined>(0)
+  const [error, setError] = useState<string>("")
 
-  const add = () => {
-    
-    /*if (props.validate(asset, amount)) {
+  function clearError() { setError("") }
 
-    }*/
+  const add = () => {   
+    if (asset === "") 
+      return setError("An Asset must be selected")
+    else if (amount||0 <= 0)
+      return setError("An Amount value must be defined")
 
-    /*if (this.state.assetCode === undefined) 
-      return this.props.warning("An Asset must be selected")
-    else if (this.state.amount === undefined)
-      return this.props.warning("A value must be defined")*/
-
-    //props.add(state.assetCode, state.amount)
+    props.add(asset, amount!)
   }
 
   return  <div className="marginTop">  
@@ -152,8 +141,8 @@ const AssetAndAmountFields = (props:NewAssetProps) => {
       <label className="col-form-label">Asset</label>          
     </div>
     <div className="col-auto">
-      <select className="form-control form-control-sm" onChange={evt => dispatch({type: "asset", data: evt.target.value})}>
-        <option>(select an asset)</option>
+      <select className="form-control form-control-sm" onChange={evt => { clearError(); setAsset(evt.target.value)}}>
+        <option value="">(select an asset)</option>
         {props.assets.map(a => <option key={a.code} value={a.code}>{a.code}</option>)}
       </select>
     </div>
@@ -161,11 +150,14 @@ const AssetAndAmountFields = (props:NewAssetProps) => {
       <label className="col-form-label">Amount</label>          
     </div>
     <div className="col-auto">
-      <AmountField isEditing={true} onChange={(value) => setAmount(value)} />
+      <AmountField isEditing={true} onChange={(value) => { clearError(); setAmount(value)}} />
     </div>
     <div className="col-auto">
       <span onClick={add} className="btn btn-primary btn-sm">Add</span>
     </div>
   </div>
+   {error && (<div className="row">
+     <div className="errorText">{error}</div>      
+  </div>)}
 </div>
 }

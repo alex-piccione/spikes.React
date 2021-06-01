@@ -69,7 +69,20 @@ code {
   margin-bottom: $space;
 }
 
-.buttonRow {
+.errorText { color: red; font-weight: 600;}
+
+.buttonsRow {
   display: flex;
+  /*flex-flow: row-reverse;*/
+ /* justify-content: space-evenly;*/
+  align-items: flex-end;
   flex-direction: row-reverse;
+}
+
+.buttonsRow .btn {
+  margin: 0 $space/2
+}
+
+.buttonsRow .btn:first-child {
+  margin: 0
 }
