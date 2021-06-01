@@ -24,6 +24,7 @@ interface Props {
   availableAssets: Asset[],
   selectedDate: Date,
   add: (date:Date, data:AssetAtDate) => void
+  close: (evt:any) => void
 }
 
 interface State {
@@ -86,7 +87,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     return <SelectedDateContext.Provider value={undefined}>
       <div className="card">
         <div className="card-body">
-          <h4 className="card-title marginBottom">Add date record</h4>
+          <h4 className="card-title marginBottom">Add date record</h4>          
           <div className="row">
             <div className="col-auto">
               <label className="col-form-label">Date</label>          
@@ -94,12 +95,15 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
             <div className="col-auto">
               <DatePicker onChange={date => this.setDate(date)} class="form-control form-control-sm" />
             </div>
+
           </div> 
           <div className="row">
               <AssetAndAmountFields assets={this.availableAssets()} add={ this.addAsset } warning={this.warning} />           
           </div>           
-          <div className="row">
-            <div></div>
+  
+          <div className="buttonRow">
+            <span className="btn btn-sm btn-danger" onClick={this.props.close}>Close</span> 
+
           </div>
         </div>
       </div>

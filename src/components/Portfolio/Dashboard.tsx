@@ -8,14 +8,15 @@ import { ConfigContext } from "../.."
 // try useContext for passing the selected date
 export const SelectedDateContext = createContext(undefined)
 
-type DashboardProps = {
+type Props = {
   availableAssets: Asset[],
   //dateClicked: (date:Date) => {}
 }
 
-type DashboardState = {
+type State = {
   portfolio: Portfolio, 
-  clickedDate: Date|undefined
+  clickedDate: Date|undefined,
+  isAddVisible: boolean
 }
 
 //var selectedDate:Date|undefined = undefined
@@ -23,13 +24,15 @@ export function portfolioDateClicked(date:Date) {
   //selectedDate = date
 }
 
-export default class PortfolioDashboard extends React.Component<DashboardProps, DashboardState> {
-  constructor(props:DashboardProps) {
-    super(props) 
+export default class PortfolioDashboard extends React.Component<Props, State> {
     
-    this.state = { portfolio: createInitialPortfolio(), clickedDate: undefined  }
-  }  
+  state = { 
+    portfolio: createInitialPortfolio(), 
+    clickedDate: undefined ,
+    isAddVisible: false
+  }
 
+  
   dateClicked = (date:Date) => {
     portfolioDateClicked(date)
     this.setState({clickedDate: date})   
@@ -51,6 +54,16 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
       this.setState({portfolio: portfolio})
     }
   }
+
+  showAdd = (event:any) => {
+    this.setState({isAddVisible: true})
+    // TODO start timer
+  }
+
+  hideAdd = (event:any) => {
+    this.setState({isAddVisible: false})
+    // TODO reset timer
+  }
   
   render() {
     return <div className="container">
@@ -65,7 +78,12 @@ export default class PortfolioDashboard extends React.Component<DashboardProps, 
       }
       <hr />
       { false && <TestDate initilaDate={this.state.clickedDate||new Date()} /> }
-      <DateAssetsAdd availableAssets={this.props.availableAssets} selectedDate={this.state.clickedDate||new Date()} add={this.addAsset} />
+      { !this.state.isAddVisible && <button className="btn btn-primary btn-sm" onClick={this.showAdd}>Add</button>}
+      { this.state.isAddVisible && 
+        <DateAssetsAdd availableAssets={this.props.availableAssets}
+          selectedDate={this.state.clickedDate||new Date()} 
+          add={this.addAsset} close={this.hideAdd} />
+      }
 
     </div>
   }
