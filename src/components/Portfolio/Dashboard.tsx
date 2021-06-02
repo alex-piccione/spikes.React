@@ -45,26 +45,25 @@ export default class PortfolioDashboard extends React.Component<Props, State> {
     clickedDate: undefined ,
     isAddVisible: false
   }
-
   
   dateClicked = (date:Date) => {
     portfolioDateClicked(date)
     this.setState({clickedDate: date})   
   }  
 
-  addAsset = (date:Date, asset:AssetAtDate) => {   
+  addAssets = (date:Date, assets:AssetAtDate[]) => {   
 
     let portfolio = this.state.portfolio   
     let existingDate = portfolio.dates.filter(d => getDatePart(d.date) === getDatePart(date))
     
     if (existingDate.length === 0) {       
-      const newDate:DateAssets = { date: date, assets: [asset]}  
+      const newDate:DateAssets = { date: date, assets: assets}  
       portfolio.dates.push( newDate )
       this.setState({portfolio: portfolio})
     }
     else
     {
-      existingDate[0].assets.push( asset )    
+      existingDate[0].assets.concat(assets) 
       this.setState({portfolio: portfolio})
     }
   }
@@ -80,6 +79,8 @@ export default class PortfolioDashboard extends React.Component<Props, State> {
   }
   
   render() {
+    const existingDates = this.state.portfolio.dates.map(d => d.date)
+
     return <div className="container">
       <h1>Portfolio </h1>
       <CurrencyInUse />  
@@ -90,13 +91,12 @@ export default class PortfolioDashboard extends React.Component<Props, State> {
         <DateAssetsView key={d.date.getTime()} dateAssets={d} dateClicked={() => this.dateClicked(d.date) } ></DateAssetsView>
       ) : <div className="body2">There are no dates.</div>
       }
-      <hr />
       { false && <TestDate initilaDate={this.state.clickedDate||new Date()} /> }
-      { !this.state.isAddVisible && <button className="btn btn-primary btn-sm" onClick={this.showAdd}>Add</button>}
+      { !this.state.isAddVisible && <button className="btn btn-primary btn-sm" onClick={this.showAdd}>Add a date</button>}
       { this.state.isAddVisible && 
-        <DateAssetsAdd availableAssets={this.props.availableAssets}
-          selectedDate={this.state.clickedDate||new Date()} 
-          add={this.addAsset} close={this.hideAdd} />
+        <DateAssetsAdd assets={this.props.availableAssets} existingDates={existingDates}
+          /*selectedDate={this.state.clickedDate||new Date()} */
+          add={this.addAssets} close={this.hideAdd} />
       }
 
     </div>

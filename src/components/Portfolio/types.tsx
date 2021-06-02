@@ -8,6 +8,7 @@ export interface DateAssets {
   assets: AssetAtDate[]
 }
 
+// TODO: rename AssetAmount or AssetQuantity
 export interface AssetAtDate {
   asset: Asset
   amount: number
@@ -16,7 +17,7 @@ export interface AssetAtDate {
 }
 
 export interface Asset {
-  name: String
+  name: string
   code: string
 }
 
