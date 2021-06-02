@@ -53,7 +53,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
   setDate = (date:Date|undefined) => {
     this.setState({date: date||undefined})
 
-    if (date && this.props.existingDates.filter(d => d.getTime() === date.getTime()))
+    if (date && this.props.existingDates.some(d => d.getTime() === date.getTime()))
       this.warning("Date already exists")
   }
 
@@ -104,7 +104,7 @@ export default class DateAssetsAdd extends React.Component<Props, State> {
     if (this.state.date === undefined)
       return this.warning("Please select a date")
 
-    if (this.props.existingDates.filter(d => d.getTime() === this.state.date.getTime()))
+    if (this.props.existingDates.some(d => d.getTime() === this.state.date.getTime()))
       return this.warning("Date already exists")
 
     if (this.state.assets.length === 0)
