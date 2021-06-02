@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import { Asset, AssetAtDate } from "./types"
 import { SelectedDateContext } from "./Dashboard"
 import { AmountField, DatePicker } from "../Fields/index"
-import { isSetAccessorDeclaration } from "typescript"
+import useInterval from "../useInterval"
 
 interface Props {
   availableAssets: Asset[],
@@ -123,6 +123,11 @@ const AssetAndAmountFields = (props:NewAssetProps) => {
   const [asset, setAsset] = useState("")
   const [amount, setAmount] = useState<number|undefined>(0)
   const [error, setError] = useState<string>("")
+  const [remainingSeconds, setRemainingSeconds] = useState(10)
+  useInterval(
+    () => setRemainingSeconds(remainingSeconds-1),
+    remainingSeconds > 0 ? 1000 : null
+  )
 
   function clearError() { setError("") }
 
@@ -153,7 +158,8 @@ const AssetAndAmountFields = (props:NewAssetProps) => {
       <AmountField isEditing={true} onChange={(value) => { clearError(); setAmount(value)}} />
     </div>
     <div className="col-auto">
-      <span onClick={add} className="btn btn-primary btn-sm">Add</span>
+      <button onClick={add} className="btn btn-primary btn-sm" disabled={remainingSeconds === 0} >Add</button>
+      {  (remainingSeconds > 0) && (<span style={{marginLeft: "8px"}}>{remainingSeconds} seconds to complete</span>)}
     </div>
   </div>
    {error && (<div className="row">
