@@ -1,7 +1,7 @@
 # Learn React
 
-git@gitlab.com:alessandro.piccione/spikes.react.git
-https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/README.md
+Repolsitory: git@gitlab.com:alessandro.piccione/spikes.react.git   
+This repository is generated with the common React template "https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/README.md.
 
 To run the app:
 - ``yarn start``
@@ -13,6 +13,8 @@ To run the app:
 - https://redux.js.org/tutorials/fundamentals/part-1-overview
 - Using React Hooks (by Peter Kellner) on Pluralsight
 
+## REact Bootstrap
+
 ## React Playgrounds
 
 If you’re interested in playing around with React, you can use an online code playground. 
@@ -21,11 +23,11 @@ Try a Hello World template on [CodePen](https://reactjs.org/redirect-to-codepen/
 
 ## Typescript
 
-- From the beginning 
+- Add Typescript the beginning 
 Use *--template typescript*  
 ``yarn create react-app my-app --template typescript``
 
-- Add later
+- Add Typescript later
 https://create-react-app.dev/docs/adding-typescript/
 ```
 yarn add typescript @types/node @types/react @types/react-dom @types/jest
@@ -35,7 +37,7 @@ and rename all .js to * .tsx
 Didn't worked straight.  
 Needed to change reportWebVitals.tsx file
 
-## Boostrap
+## Boostrap (CSS)
 The project use [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
 ## Tests
