@@ -1,4 +1,4 @@
-# Spike on React
+# Learn React
 
 git@gitlab.com:alessandro.piccione/spikes.react.git
 https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/README.md
@@ -10,6 +10,7 @@ To run the app:
 ## Courses:
 
 - React Fundamentals on Pluralsight: https://app.pluralsight.com/course-player?clipId=9bd76a89-6388-4662-9346-98fa57976263
+- https://redux.js.org/tutorials/fundamentals/part-1-overview
 - Using React Hooks (by Peter Kellner) on Pluralsight
 
 ## React Playgrounds
@@ -33,16 +34,6 @@ and rename all .js to * .tsx
 
 Didn't worked straight.  
 Needed to change reportWebVitals.tsx file
-
-# Redux
-Application state container.
-
-Added "redux", "react-redux" and "@types/react-redux" libraries (the last one should be included automatically).  
-I'm trying to follow the Pluralsight course and I built a custom StateContainer with dispatch(), submit(), getState(), update() (= reduce()) 
-but I find out the symntax used by Redux JS is quite different with the TypeScript version so I'm switching looking into this course too:
-https://redux.js.org/tutorials/fundamentals/part-1-overview
-
-
 
 ## Boostrap
 The project use [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
